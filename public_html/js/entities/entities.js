@@ -20,6 +20,7 @@ game.PlayerEntity = me.Entity.extend({
 //        
 //        this._super(me.Entity, 'init', [x, y, settings]);
         this.body.setVelocity(5, 20);
+        me.game.viewport.follow(this.pos,me.game.veiwport.AXIS.BOTH);
         
     },
     
@@ -29,6 +30,8 @@ update: function(delta){
         }else{
             this.body.vel.x = 0;
         }
+         this.body.update(delta);
+         me.collision.check(this, true, this.collideHandler.bind(this), true);
         if(this.body.vel.x !== 0){
             if(!this.renderable.isCurrentAnimation("smallWalk")){
                 this.renderable.setCurrentAnimation("smallWalk");
@@ -37,9 +40,12 @@ update: function(delta){
         }else{
             this.renderable.setCurrentAnimation("idle");
         }
-        this.body.update(delta);
+        
         this._super(me.Entity, "update",[delta]);
         return true;
+    },
+    collideHandler: function(response){
+        
     }
     
 });
@@ -47,6 +53,13 @@ game.levelTrigger= me.Entity.extend({
     init:function(x, y, settings){
         this._super(me.Entity,'init', [x, y, settings]);
         this.body.onCollision = this.onCollision.bind(this);
+        this.level = settings.level;
+        this.xSpawn = settings.xSpawn;
+        this.ySpawn = settings.ySpawn;
     },
-    onCollsion:function
+    onCollsion:function(){
+        this.body.setCollisionMask(me.collision.types.NO_OBJECT);
+        me.levelDirector.loadLevel(this.level);
+        me.state.current().resetPlayer(this.xSpawn, this.ySpawn);
+    }
 });
