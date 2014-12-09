@@ -29,4 +29,4 @@ game.resources = [
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}
 	 */
-];
+];//animation pictures and game pictures//

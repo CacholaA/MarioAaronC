@@ -10,6 +10,7 @@ game.TitleScreen = me.ScreenObject.extend({
             init: function(){
                 this._super(me.renderable, 'init',[520,30, me.game.viewport.width, me.game.viewport.height]);
                 this.font = new me.font("Arial", 46,"purple");
+                //title screen settings//
             },
             draw: function(renderer){
                 this.font.draw(renderer. getContext(),"Mario-like",450, 130);

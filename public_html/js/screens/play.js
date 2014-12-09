@@ -23,6 +23,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		this.HUD = new game.HUD.Container();
 		me.game.world.addChild(this.HUD);
 	},
+        //movement right left and jump//
 
 
 	/**
@@ -36,6 +37,6 @@ game.PlayScreen = me.ScreenObject.extend({
         resetPlayer: function(x, y){
             var player = me.pool.pull("mario", 0, 420, {});
                 me.game.world.addChild(player,5);
-        }
+                //reset player code //
 
 });

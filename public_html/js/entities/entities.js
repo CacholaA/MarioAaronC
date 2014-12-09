@@ -16,7 +16,7 @@ game.PlayerEntity = me.Entity.extend({
     
     this.renderable.setCurrentAnimation("idle");
     
-    
+    //animations//
 //        
 //        this._super(me.Entity, 'init', [x, y, settings]);
         this.body.setVelocity(5, 20);
@@ -45,7 +45,7 @@ update: function(delta) {
             }
         }
     },
-    
+    //movement///
     collideHandler: function () {
         
     }
@@ -65,3 +65,4 @@ game.levelTrigger= me.Entity.extend({
         me.state.current().resetPlayer(this.xSpawn, this.ySpawn);
     }
 });
+//spawning code//
