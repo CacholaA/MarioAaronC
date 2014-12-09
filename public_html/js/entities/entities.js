@@ -24,27 +24,29 @@ game.PlayerEntity = me.Entity.extend({
         
     },
     
-update: function(delta){
-        if(me.input.isKeyPressed("right")){
+update: function(delta) {
+        if (me.input.isKeyPressed("right")) {
             this.body.vel.x += this.body.accel.x * me.timer.tick;
-        }else{
+            this.flipX(false);
+        } else if (me.input.isKeyPressed('left')) {
+            this.flipX(true);
+            this.body.vel.x -= this.body.accel.x * me.timer.tick;
+        } else {
             this.body.vel.x = 0;
         }
-         this.body.update(delta);
-         me.collision.check(this, true, this.collideHandler.bind(this), true);
-        if(this.body.vel.x !== 0){
-            if(!this.renderable.isCurrentAnimation("smallWalk")){
-                this.renderable.setCurrentAnimation("smallWalk");
-                this.renderable.setAnimationFrame();
+
+        this.body.update(delta);
+        me.collision.check(this, true, this.collideHandler.bind(this), true);
+
+        if (me.input.isKeyPressed('jump')) {
+            if (!this.body.jumping && !this.body.falling) {
+                this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
+                this.body.jumping = true;
             }
-        }else{
-            this.renderable.setCurrentAnimation("idle");
         }
-        
-        this._super(me.Entity, "update",[delta]);
-        return true;
     },
-    collideHandler: function(response){
+    
+    collideHandler: function () {
         
     }
     
