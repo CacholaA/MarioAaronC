@@ -4,7 +4,13 @@ game.TitleScreen = me.ScreenObject.extend({
 	 */
 	onResetEvent: function() {	
 	var titleImage = new me.sprite(0, 0,me.loader.getImage("title-screen"));
-        me.game.world.addChild(title-image, 1;)
+        me.game.world.addChild(title-image, 1);
+        me.input.bindKey(me.input.KEY.ENTER,"start");
+        this.handler = me.event.subscribe(me.event.KEYDOWN, function(action, keyCode, edge){
+            if(action === "start"){
+                me.state.change(me.state.PLAY);
+            }
+        });
 	},
 	
 	
